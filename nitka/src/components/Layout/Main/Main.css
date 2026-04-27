@@ -1,0 +1,8 @@
+.main {
+  border: 2px solid yellow;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+}
