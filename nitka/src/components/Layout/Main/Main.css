@@ -1,6 +1,13 @@
 .main {
+  margin: 30px;
   border: 2px solid yellow;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main__params {
   display: flex;
   flex-direction: column;
   gap: 10px;

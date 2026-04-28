@@ -2,6 +2,7 @@ export interface Measurements {
   waist: number;
   hips: number;
   length: number;
+  beltWidth: number;
 }
 
 export type PathCommand =

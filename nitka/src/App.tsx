@@ -19,9 +19,11 @@ export default function App() {
           const result = generateSkirtPattern(data);
           setPattern(result);
         }}
-      />
+      >
+        <PatternPreview commands={pattern} />
+      </Main>
 
-      <PatternPreview commands={pattern} />
+      {/* <PatternPreview commands={pattern} /> */}
 
       <Footer></Footer>
     </div>
