@@ -1,0 +1,34 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+  max-width: 260px;
+}
+
+.form__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.form__field input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.form__field input:focus {
+  outline: none;
+  border-color: #888;
+}

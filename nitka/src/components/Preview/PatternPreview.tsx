@@ -24,14 +24,6 @@ export function PatternPreview({ commands }: Props) {
 
   return (
     <div className="patternPreview">
-      <Button
-        onClick={() => {
-          exportPatternToPdf(path, bbox);
-        }}
-      >
-        Скачать PDF
-      </Button>
-
       {/* скрытый SVG */}
       <svg style={{ position: "absolute", opacity: 0 }}>
         <path ref={ref} d={path} />
@@ -39,12 +31,12 @@ export function PatternPreview({ commands }: Props) {
 
       {/* превью */}
       <svg
-        width="50%"
+        width="100%"
         viewBox={`${bbox.x} ${bbox.y} ${Math.max(bbox.width, 210)} ${Math.max(
           bbox.height,
           297
         )}`}
-        style={{ border: "3px solid #ccc" }}
+        // style={{ border: "3px solid #ccc" }}
       >
         <path
           d={path}
@@ -56,6 +48,14 @@ export function PatternPreview({ commands }: Props) {
 
         <A4Grid bbox={bbox} />
       </svg>
+
+      <Button
+        onClick={() => {
+          exportPatternToPdf(path, bbox);
+        }}
+      >
+        Скачать PDF
+      </Button>
     </div>
   );
 }

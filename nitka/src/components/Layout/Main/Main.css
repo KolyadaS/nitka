@@ -1,4 +1,4 @@
-.main {
+/* .main {
   margin: 30px;
   border: 2px solid yellow;
   padding: 30px;
@@ -12,4 +12,14 @@
   flex-direction: column;
   gap: 10px;
   width: fit-content;
+} */
+
+.main {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.main__params {
+  flex-shrink: 0;
 }
