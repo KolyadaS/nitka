@@ -9,10 +9,10 @@ interface Props {
 
 export function SunSkirtForm({ onSubmit }: Props) {
   const [form, setForm] = useState<Measurements>({
-    waist: 70,
-    hips: 96,
-    length: 60,
-    beltWidth: 3,
+    waist: 700,
+    hips: 960,
+    length: 600,
+    beltWidth: 30,
   });
 
   return (
@@ -26,7 +26,7 @@ export function SunSkirtForm({ onSubmit }: Props) {
       <h2 className="form__title">Юбка-солнце</h2>
 
       <label className="form__field">
-        <span>Обхват талии</span>
+        <span>Обхват талии (мм)</span>
         <input
           type="number"
           value={form.waist}
@@ -35,7 +35,7 @@ export function SunSkirtForm({ onSubmit }: Props) {
       </label>
 
       <label className="form__field">
-        <span>Обхват бедер</span>
+        <span>Обхват бедер (мм)</span>
         <input
           type="number"
           value={form.hips}
@@ -44,7 +44,7 @@ export function SunSkirtForm({ onSubmit }: Props) {
       </label>
 
       <label className="form__field">
-        <span>Длина</span>
+        <span>Длина (мм)</span>
         <input
           type="number"
           value={form.length}
@@ -53,7 +53,7 @@ export function SunSkirtForm({ onSubmit }: Props) {
       </label>
 
       <label className="form__field">
-        <span>Ширина пояса</span>
+        <span>Ширина пояса (мм)</span>
         <input
           type="number"
           value={form.beltWidth}
