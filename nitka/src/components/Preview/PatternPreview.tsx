@@ -3,9 +3,8 @@ import type { PathCommand } from "../../types/types";
 import { buildPath } from "../../core/utils/buildPath";
 import { usePatternBBox } from "../../hooks/usePatternBBox";
 import { exportPatternToPdf } from "../../core/export/exportPdf";
-
-const A4_WIDTH = 210;
-const A4_HEIGHT = 297;
+import { A4Grid } from "./A4Grid";
+import { Button } from "../Controls/Button/Button";
 
 interface Props {
   commands: PathCommand[];
@@ -23,20 +22,15 @@ export function PatternPreview({ commands }: Props) {
     );
   }
 
-  const cols = Math.ceil(bbox.width / A4_WIDTH);
-  const rows = Math.ceil(bbox.height / A4_HEIGHT);
-
   return (
     <div className="patternPreview">
-      <button
+      <Button
         onClick={() => {
-          if (bbox) {
-            exportPatternToPdf(path, bbox);
-          }
+          exportPatternToPdf(path, bbox);
         }}
       >
         Скачать PDF
-      </button>
+      </Button>
 
       {/* скрытый SVG */}
       <svg style={{ position: "absolute", opacity: 0 }}>
@@ -45,9 +39,12 @@ export function PatternPreview({ commands }: Props) {
 
       {/* превью */}
       <svg
-        width="100%"
-        viewBox={`${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`}
-        style={{ border: "1px solid #ccc" }}
+        width="50%"
+        viewBox={`${bbox.x} ${bbox.y} ${Math.max(bbox.width, 210)} ${Math.max(
+          bbox.height,
+          297
+        )}`}
+        style={{ border: "3px solid #ccc" }}
       >
         <path
           d={path}
@@ -57,30 +54,76 @@ export function PatternPreview({ commands }: Props) {
           fillOpacity="0.5"
         />
 
-        {Array.from({ length: cols }).map((_, col) =>
-          Array.from({ length: rows }).map((_, row) => {
-            const x = bbox.x + col * A4_WIDTH;
-            const y = bbox.y + row * A4_HEIGHT;
-
-            return (
-              <g key={`${col}-${row}`}>
-                <rect
-                  x={x}
-                  y={y}
-                  width={A4_WIDTH}
-                  height={A4_HEIGHT}
-                  fill="none"
-                  stroke="red"
-                  strokeDasharray="6 4"
-                />
-              </g>
-            );
-          })
-        )}
+        <A4Grid bbox={bbox} />
       </svg>
     </div>
   );
 }
+
+// ===================================================================
+
+// import "./PatternPreview.css";
+// import type { PathCommand } from "../../types/types";
+// import { buildPath } from "../../core/utils/buildPath";
+// import { usePatternBBox } from "../../hooks/usePatternBBox";
+// import { exportPatternToPdf } from "../../core/export/exportPdf";
+// import { A4Grid } from "./A4Grid";
+
+// interface Props {
+//   commands: PathCommand[];
+// }
+
+// export function PatternPreview({ commands }: Props) {
+//   const path = buildPath(commands);
+//   const { ref, bbox } = usePatternBBox(path);
+
+//   if (!bbox) {
+//     return (
+//       <svg style={{ position: "absolute", opacity: 0 }}>
+//         <path ref={ref} d={path} />
+//       </svg>
+//     );
+//   }
+
+//   return (
+//     <div className="patternPreview">
+//       <button
+//         onClick={() => {
+//           if (bbox) {
+//             exportPatternToPdf(path, bbox);
+//           }
+//         }}
+//       >
+//         Скачать PDF
+//       </button>
+
+//       {/* скрытый SVG */}
+//       <svg style={{ position: "absolute", opacity: 0 }}>
+//         <path ref={ref} d={path} />
+//       </svg>
+
+//       {/* превью */}
+//       <svg
+//         width="50%"
+//         viewBox={`${bbox.x} ${bbox.y} ${Math.max(bbox.width, 210)} ${Math.max(
+//           bbox.height,
+//           297
+//         )}`}
+//         style={{ border: "3px solid #ccc" }}
+//       >
+//         <path
+//           d={path}
+//           stroke="black"
+//           fill="green"
+//           strokeWidth="1"
+//           fillOpacity="0.5"
+//         />
+
+//         <A4Grid bbox={bbox} />
+//       </svg>
+//     </div>
+//   );
+// }
 
 // ===========================================================================
 

@@ -1,5 +1,10 @@
 .patternPreview {
   /* max-width: 1200px;
   margin: auto;
-  border: 3px solid purple; */
+  /* border: 3px solid purple; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* width: fit-content; */
+  border: 3px solid purple;
 }

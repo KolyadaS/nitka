@@ -1,9 +1,11 @@
 import type { Measurements } from "../../../types/types";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import "./Main.css";
+import { Button } from "../../Controls/Button/Button";
 
 interface Props {
   onSubmit: (data: Measurements) => void;
+  children: ReactNode;
 }
 
 export function Main({ onSubmit, children }: Props) {
@@ -63,7 +65,7 @@ export function Main({ onSubmit, children }: Props) {
           />
         </label>
 
-        <button onClick={() => onSubmit(form)}>Создать выкройку</button>
+        <Button onClick={() => onSubmit(form)}>Создать выкройку</Button>
       </section>
 
       {children}

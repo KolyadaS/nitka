@@ -10,10 +10,7 @@ function createSvgElement(svgString: string): SVGSVGElement {
   return doc.documentElement as unknown as SVGSVGElement;
 }
 
-export async function exportPatternToPdf(
-  path: string,
-  bbox: DOMRect
-) {
+export async function exportPatternToPdf(path: string, bbox: DOMRect) {
   const pdf = new jsPDF({
     unit: "mm",
     format: "a4",
@@ -39,10 +36,14 @@ export async function exportPatternToPdf(
           
           <path d="${path}" stroke="black" fill="none"/>
 
-          <!-- тест масштаба -->
-          <rect x="10" y="10" width="100" height="10"
-            stroke="red" fill="none"/>
-
+          <!-- тестирование масштаба -->
+            <rect x="55" y="100" width="100" height="100"
+                stroke="grey" stroke-width="0.3" fill="none"/>
+            
+            <text x="95" y="150" font-size="5" fill="grey">
+                10×10cm
+            </text>
+          
         </svg>
       `;
 
