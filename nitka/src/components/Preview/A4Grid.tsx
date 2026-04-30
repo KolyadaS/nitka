@@ -29,7 +29,7 @@ export function A4Grid({ bbox }: Props) {
               />
 
               <text x={x + 5} y={y + 15} fontSize="10" fill="red">
-                Лист {col + 1}×{row + 1}
+                Лист {row + 1}×{col + 1}
               </text>
             </g>
           );
