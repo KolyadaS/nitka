@@ -1,5 +1,6 @@
 import jsPDF from "jspdf";
 import "svg2pdf.js";
+import { robotoBase64 } from "../../assets/fonts/roboto";
 
 const A4_WIDTH = 210;
 const A4_HEIGHT = 297;
@@ -20,6 +21,10 @@ export async function exportPatternToPdf(path: string, bbox: DOMRect) {
     format: "a4",
   });
 
+  pdf.addFileToVFS("Roboto.ttf", robotoBase64);
+  pdf.addFont("Roboto.ttf", "Roboto", "normal");
+  pdf.setFont("Roboto");
+
   const cols = Math.ceil(bbox.width / INNER_WIDTH);
   const rows = Math.ceil(bbox.height / INNER_HEIGHT);
 
@@ -32,7 +37,7 @@ export async function exportPatternToPdf(path: string, bbox: DOMRect) {
       const x = bbox.x + col * INNER_WIDTH;
       const y = bbox.y + row * INNER_HEIGHT;
 
-      const label = `List ${col + 1}×${row + 1}`;
+      const label = `Лист ${col + 1}×${row + 1}`;
 
       const svgString = `
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +47,6 @@ export async function exportPatternToPdf(path: string, bbox: DOMRect) {
           
           <path d="${path}" stroke="black" fill="none"/>
 
-          <!-- рамка рабочей области (для печати) -->
           <rect
             x="${x}"
             y="${y}"
@@ -54,19 +58,9 @@ export async function exportPatternToPdf(path: string, bbox: DOMRect) {
             fill="none"
           />
 
-          <!-- тестирование масштаба -->
+          <!-- тест масштаба -->
           <rect x="55" y="100" width="100" height="100"
                 stroke="grey" stroke-width="0.3" fill="none"/>
-          <text x="95" y="150" font-size="5" fill="grey">
-                10×10cm
-          </text>
-
-          <!-- подпись листов -->
-          <text x="${x + 5}" y="${y + 15}"
-                font-size="12" fill="grey">
-                ${label}
-          </text>
-
         </svg>
       `;
 
@@ -78,6 +72,19 @@ export async function exportPatternToPdf(path: string, bbox: DOMRect) {
         width: INNER_WIDTH,
         height: INNER_HEIGHT,
       });
+
+      // рисуем текст через pdf
+      pdf.setFontSize(10);
+      pdf.setTextColor(150);
+
+      // подпись листов
+      pdf.text(label, MARGIN + 5, MARGIN + 10);
+
+      // подпись для тестового квадрата (первая страница)
+      if (pageIndex === 0) {
+        pdf.text("Тестовый квадрат", 100, 155);
+        pdf.text("10×10 см", 107, 165);
+      }
 
       pageIndex++;
     }
