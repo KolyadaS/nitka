@@ -1,11 +1,9 @@
 import jsPDF from "jspdf";
 import "svg2pdf.js";
-
 import { robotoBase64 } from "../../assets/fonts/roboto";
-
 import { buildPath } from "../utils/buildPath";
-
 import type { PatternPart } from "../geometry/SunSkirt";
+import { TEXT_STYLES } from "../constants/TextStyles";
 
 const A4_WIDTH = 210;
 const A4_HEIGHT = 297;
@@ -79,18 +77,6 @@ export async function exportPatternToPdf(parts: PatternPart[], bbox: DOMRect) {
                     />
                   `;
                 }
-
-                case "text":
-                  return `
-                    <text
-                      x="${shape.x}"
-                      y="${shape.y}"
-                      font-size="${shape.style || 12}"
-                      fill="black"
-                    >
-                      ${shape.text}
-                    </text>
-                  `;
 
                 case "grainline":
                   return `
@@ -174,6 +160,37 @@ export async function exportPatternToPdf(parts: PatternPart[], bbox: DOMRect) {
         y: MARGIN,
         width: INNER_WIDTH,
         height: INNER_HEIGHT,
+      });
+
+      parts.forEach((part) => {
+        part.shapes.forEach((shape) => {
+          if (shape.kind !== "text") return;
+
+          const textX = shape.x + part.offsetX - x + MARGIN;
+          const textY = shape.y + part.offsetY - y + MARGIN;
+
+          // не рисуем текст вне текущего листа
+          if (
+            textX < MARGIN ||
+            textX > A4_WIDTH - MARGIN ||
+            textY < MARGIN ||
+            textY > A4_HEIGHT - MARGIN
+          ) {
+            return;
+          }
+
+          const fontSize = TEXT_STYLES[shape.style || "label"];
+
+          pdf.setFontSize(fontSize);
+
+          if (shape.rotation) {
+            pdf.text(shape.text, textX, textY, {
+              angle: -shape.rotation,
+            });
+          } else {
+            pdf.text(shape.text, textX, textY);
+          }
+        });
       });
 
       pdf.setFontSize(10);
