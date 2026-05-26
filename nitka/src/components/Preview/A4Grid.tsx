@@ -25,10 +25,11 @@ export function A4Grid({ bbox }: Props) {
                 height={A4_HEIGHT}
                 fill="none"
                 stroke="red"
+                strokeWidth="0.3"
                 strokeDasharray="6 4"
               />
 
-              <text x={x + 5} y={y + 15} fontSize="10" fill="red">
+              <text x={x + 5} y={y + 8} fontSize="10" fill="red">
                 Лист {row + 1}×{col + 1}
               </text>
             </g>
