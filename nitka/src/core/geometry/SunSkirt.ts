@@ -26,19 +26,20 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
     { type: "M", x: 0 + seamAllowance, y: 0 + seamAllowance }, // A
     {
       type: "L",
-      x: m.waist + beltClosureAllowance + seamAllowance,
+      // x: m.waist + beltClosureAllowance + seamAllowance,
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance,
       y: 0 + seamAllowance,
     }, // B
     {
       type: "L",
-      x: m.waist + beltClosureAllowance + seamAllowance,
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance,
       y: beltWidth * 2 + seamAllowance,
     }, // C
     { type: "L", x: 0 + seamAllowance, y: beltWidth * 2 + seamAllowance }, // D
     { type: "Z" },
   ];
 
-  const beltBaseCenter: PathCommand[] = [
+  const beltBaseFoldLine: PathCommand[] = [
     {
       type: "M",
       x: 0 + seamAllowance,
@@ -46,8 +47,149 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
     },
     {
       type: "L",
-      x: m.waist + beltClosureAllowance + seamAllowance,
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance,
       y: Math.round(beltWidth * 2 * 10) / 20 + seamAllowance,
+    },
+  ];
+
+  const beltClosure: PathCommand[] = [
+    {
+      type: "M",
+      x: 2 * 3.14 * waistRadius + seamAllowance,
+      y: seamAllowance,
+    },
+    {
+      type: "L",
+      x: 2 * 3.14 * waistRadius + seamAllowance,
+      y: seamAllowance + beltWidth * 2,
+    },
+  ];
+
+  const beltButton: PathCommand[] = [
+    {
+      type: "M",
+      x: seamAllowance + beltClosureAllowance / 2 + 5,
+      y: seamAllowance + beltWidth * 1.5 - 4,
+    },
+
+    {
+      type: "A",
+      rx: 8,
+      ry: 8,
+      rotation: 0,
+      largeArc: 1,
+      sweep: 0,
+      x: seamAllowance + beltClosureAllowance / 2 + 5,
+      y: seamAllowance + beltWidth * 1.5 + 4,
+    },
+
+    {
+      type: "A",
+      rx: 8,
+      ry: 8,
+      rotation: 0,
+      largeArc: 0,
+      sweep: 0,
+      x: seamAllowance + beltClosureAllowance / 2 + 5,
+      y: seamAllowance + beltWidth * 1.5 - 4,
+    },
+
+    // ===============
+
+    {
+      type: "M",
+      x: seamAllowance + beltClosureAllowance / 2 + 5 - 4,
+      y: seamAllowance + beltWidth * 1.5 - 1,
+    },
+
+    {
+      type: "A",
+      rx: 1,
+      ry: 1,
+      rotation: 0,
+      largeArc: 1,
+      sweep: 0,
+      x: seamAllowance + beltClosureAllowance / 2 + 5 - 4,
+      y: seamAllowance + beltWidth * 1.5 + 1,
+    },
+
+    {
+      type: "A",
+      rx: 1,
+      ry: 1,
+      rotation: 0,
+      largeArc: 0,
+      sweep: 0,
+      x: seamAllowance + beltClosureAllowance / 2 + 5 - 4,
+      y: seamAllowance + beltWidth * 1.5 - 1,
+    },
+
+    // ===============
+
+    {
+      type: "M",
+      x: seamAllowance + beltClosureAllowance / 2 + 5 - 10,
+      y: seamAllowance + beltWidth * 1.5 - 1,
+    },
+
+    {
+      type: "A",
+      rx: 1,
+      ry: 1,
+      rotation: 0,
+      largeArc: 1,
+      sweep: 0,
+      x: seamAllowance + beltClosureAllowance / 2 + 5 - 10,
+      y: seamAllowance + beltWidth * 1.5 + 1,
+    },
+
+    {
+      type: "A",
+      rx: 1,
+      ry: 1,
+      rotation: 0,
+      largeArc: 0,
+      sweep: 0,
+      x: seamAllowance + beltClosureAllowance / 2 + 5 - 10,
+      y: seamAllowance + beltWidth * 1.5 - 1,
+    },
+  ];
+
+  const beltButtonHole: PathCommand[] = [
+    {
+      type: "M",
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance / 2 - 2,
+      y: seamAllowance + beltWidth * 1.5 - 5,
+    },
+
+    {
+      type: "L",
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance / 2 + 2,
+      y: seamAllowance + beltWidth * 1.5 - 5,
+    },
+
+    {
+      type: "M",
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance / 2,
+      y: seamAllowance + beltWidth * 1.5 - 5,
+    },
+
+    {
+      type: "L",
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance / 2,
+      y: seamAllowance + beltWidth * 1.5 + 5,
+    },
+
+    {
+      type: "M",
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance / 2 - 2,
+      y: seamAllowance + beltWidth * 1.5 + 5,
+    },
+
+    {
+      type: "L",
+      x: 2 * 3.14 * waistRadius + seamAllowance + beltClosureAllowance / 2 + 2,
+      y: seamAllowance + beltWidth * 1.5 + 5,
     },
   ];
 
@@ -55,12 +197,14 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
     { type: "M", x: 0, y: 0 }, // A
     {
       type: "L",
-      x: m.waist + beltClosureAllowance + seamAllowance * 2,
+      // x: m.waist + beltClosureAllowance + seamAllowance * 2,
+      x: 2 * 3.14 * waistRadius + seamAllowance * 2 + beltClosureAllowance,
       y: 0,
     }, // B
     {
       type: "L",
-      x: m.waist + beltClosureAllowance + seamAllowance * 2,
+      // x: m.waist + beltClosureAllowance + seamAllowance * 2,
+      x: 2 * 3.14 * waistRadius + seamAllowance * 2 + beltClosureAllowance,
       y: beltWidth * 2 + seamAllowance * 2,
     }, // C
     { type: "L", x: 0, y: beltWidth * 2 + seamAllowance * 2 }, // D
@@ -69,7 +213,7 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
   ];
 
   const skirtBase: PathCommand[] = [
-    { type: "M", x: 0 + seamAllowance, y: waistRadius + seamAllowance }, // A
+    { type: "M", x: 0, y: waistRadius + seamAllowance }, // A
     {
       type: "A",
       rx: waistRadius,
@@ -77,10 +221,10 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
       rotation: 90,
       largeArc: 0,
       sweep: 0,
-      x: waistRadius + seamAllowance,
+      x: waistRadius,
       y: 0 + seamAllowance,
     }, // B
-    { type: "L", x: lengthRadius + seamAllowance, y: 0 + seamAllowance }, // C
+    { type: "L", x: lengthRadius, y: 0 + seamAllowance }, // C
     {
       type: "A",
       rx: lengthRadius,
@@ -88,16 +232,19 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
       rotation: 90,
       largeArc: 0,
       sweep: 1,
-      x: 0 + seamAllowance,
+      x: 0,
       y: lengthRadius + seamAllowance,
     },
-    { type: "Z" },
+  ];
+
+  const skirtBaseFoldLine: PathCommand[] = [
+    { type: "M", x: 0, y: waistRadius + seamAllowance },
+
+    { type: "L", x: 0, y: lengthRadius + seamAllowance },
   ];
 
   const skirtAllowance: PathCommand[] = [
     { type: "M", x: 0, y: waistRadius },
-
-    { type: "L", x: seamAllowance, y: waistRadius },
 
     {
       type: "A",
@@ -106,11 +253,11 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
       rotation: 90,
       largeArc: 0,
       sweep: 0,
-      x: waistRadius,
+      x: waistRadius - seamAllowance,
       y: seamAllowance,
     },
 
-    { type: "L", x: waistRadius, y: 0 },
+    { type: "L", x: waistRadius - seamAllowance, y: 0 },
 
     {
       type: "L",
@@ -126,22 +273,42 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
 
     {
       type: "A",
-      rx: lengthRadius + hemAllowance,
-      ry: lengthRadius + hemAllowance,
+      rx: lengthRadius + hemAllowance + seamAllowance,
+      ry: lengthRadius + hemAllowance + seamAllowance,
       rotation: 90,
       largeArc: 0,
       sweep: 1,
-      x: seamAllowance,
-      y: lengthRadius + seamAllowance + hemAllowance,
+      x: 0,
+      y: lengthRadius + 2 * seamAllowance + hemAllowance,
+    },
+
+    { type: "Z" },
+  ];
+
+  const zipper: PathCommand[] = [
+    {
+      type: "M",
+      x: waistRadius,
+      y: seamAllowance + 1,
     },
 
     {
       type: "L",
-      x: 0,
-      y: lengthRadius + seamAllowance + hemAllowance,
+      x: seamAllowance + waistRadius + hipsRadius,
+      y: seamAllowance + 1,
     },
 
-    { type: "Z" },
+    {
+      type: "L",
+      x: seamAllowance + waistRadius + hipsRadius,
+      y: seamAllowance + 11,
+    },
+
+    {
+      type: "L",
+      x: seamAllowance + waistRadius + hipsRadius,
+      y: seamAllowance + 1,
+    },
   ];
 
   return [
@@ -159,7 +326,25 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
         {
           kind: "path",
           style: "dashed",
-          commands: beltBaseCenter,
+          commands: beltBaseFoldLine,
+        },
+
+        {
+          kind: "path",
+          style: "main",
+          commands: beltClosure,
+        },
+
+        {
+          kind: "path",
+          style: "main",
+          commands: beltButton,
+        },
+
+        {
+          kind: "path",
+          style: "main",
+          commands: beltButtonHole,
         },
 
         {
@@ -178,7 +363,7 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
 
         {
           kind: "text",
-          x: seamAllowance + 2,
+          x: 3.14 * waistRadius,
           y: Math.round(beltWidth * 2 * 10) / 20 + seamAllowance - 2,
           text: "Линия сгиба пояса",
           style: "label",
@@ -199,8 +384,20 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
 
         {
           kind: "path",
+          style: "dashed",
+          commands: skirtBaseFoldLine,
+        },
+
+        {
+          kind: "path",
           style: "thin",
           commands: skirtAllowance,
+        },
+
+        {
+          kind: "path",
+          style: "main",
+          commands: zipper,
         },
 
         {
@@ -213,11 +410,20 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
 
         {
           kind: "text",
-          x: (waistRadius + seamAllowance + lengthRadius) / 2 - 20,
-          y: seamAllowance + 6,
+          x: (seamAllowance + hipsRadius) / 2 + waistRadius - 8,
+          y: seamAllowance + 8,
+          text: "Молния",
+          style: "label",
+        },
+
+        {
+          kind: "text",
+          x: (waistRadius + seamAllowance + lengthRadius) / 2,
+          y: seamAllowance + 8,
           text: "Боковой шов",
           style: "label",
         },
+
         {
           kind: "text",
           x: waistRadius + seamAllowance + 10,
@@ -236,7 +442,7 @@ export function generateSkirtPattern(m: Measurements): PatternPart[] {
 
         {
           kind: "text",
-          x: seamAllowance + 2,
+          x: 2,
           y: ((waistRadius + seamAllowance + lengthRadius) / 2) * 0.8,
           text: "Линия сгиба передней/задней половинки юбки",
           style: "label",
