@@ -1,0 +1,18 @@
+.home {
+  border: 2px solid salmon;
+}
+
+.home__hero {
+  border: 1px solid seagreen;
+}
+
+.hero__title {
+  /* margin-top: 50px; */
+}
+
+.hero__text {
+  /* padding: 30px; */
+}
+
+.hero_button {
+}

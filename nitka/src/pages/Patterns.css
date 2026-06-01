@@ -1,0 +1,19 @@
+.patterns__category {
+  border: 1px solid red;
+}
+
+.category__title {
+  color: var(--text-h);
+}
+
+.category__grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.category__card {
+  width: 150px;
+  height: 150px;
+  border: 1px solid blueviolet;
+}

@@ -2,7 +2,7 @@ import jsPDF from "jspdf";
 import "svg2pdf.js";
 import { robotoBase64 } from "../../assets/fonts/roboto";
 import { buildPath } from "../utils/buildPath";
-import type { PatternPart } from "../geometry/SunSkirt";
+import type { PatternPart } from "../geometry/CircleSkirtWithZipper";
 import { TEXT_STYLES } from "../constants/TextStyles";
 
 const A4_WIDTH = 210;

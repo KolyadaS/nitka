@@ -4,7 +4,7 @@ import { usePatternBBox } from "../../hooks/usePatternBBox";
 import { exportPatternToPdf } from "../../core/export/exportPdf";
 import { A4Grid } from "./A4Grid";
 import { Button } from "../Controls/Button/Button";
-import type { PatternPart } from "../../core/geometry/SunSkirt";
+import type { PatternPart } from "../../core/geometry/CircleSkirtWithZipper";
 import { TEXT_STYLES } from "../../core/constants/TextStyles";
 interface Props {
   parts: PatternPart[];
