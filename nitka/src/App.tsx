@@ -11,14 +11,8 @@ import Footer from "./components/Layout/Footer/Footer";
 export default function App() {
   return (
     <div>
-      {/* <Header>
-        <nav className="header__havigation">
-          <Link to="/">Главная</Link>| <Link to="/">Выкройки</Link> |
-          <Link to="/">Как снять мерки</Link> |<Link to="/">О проекте</Link>
-        </nav>
-      </Header> */}
-
       <Header></Header>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/patterns" element={<Patterns />} />
