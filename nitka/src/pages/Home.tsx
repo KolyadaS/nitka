@@ -1,5 +1,6 @@
 import "./Home.css";
 import { Button } from "../components/Controls/Button/Button";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -9,7 +10,9 @@ export default function Home() {
         <p className="hero__text">
           Создавайте базовые выкройки под свою фигуру.
         </p>
-        <Button className="hero_button">Создать свою выкройку</Button>
+        <Link to="/patterns">
+          <Button className="hero_button">Создать свою выкройку</Button>
+        </Link>
       </div>
     </section>
   );
