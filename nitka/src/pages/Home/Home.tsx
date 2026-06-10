@@ -1,5 +1,5 @@
 import "./Home.css";
-import { Button } from "../components/Controls/Button/Button";
+import { Button } from "../../components/Controls/Button/Button";
 import { Link } from "react-router-dom";
 
 export default function Home() {

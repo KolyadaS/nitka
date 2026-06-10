@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Patterns from "./pages/Patterns";
+import Home from "./pages/Home/Home";
+import Patterns from "./pages/Patterns/Patterns";
 import Skirts from "./pages/women/skirts/Skirts";
 import Blouses from "./pages/women/blouses/Blouses";
 
 import Header from "./components/Layout/Header/Header";
 import Footer from "./components/Layout/Footer/Footer";
+import Measurements from "./pages/Measurements/Measurements";
+import About from "./pages/About/About";
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/patterns" element={<Patterns />} />
+        <Route path="/measurements" element={<Measurements />} />
+        <Route path="/about" element={<About />} />
 
         <Route path="/skirts/*" element={<Skirts />} />
         <Route path="/blouses/*" element={<Blouses />} />
